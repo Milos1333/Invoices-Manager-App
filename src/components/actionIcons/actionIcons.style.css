@@ -1,0 +1,42 @@
+.action-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  gap: 20px;
+  border: 1px solid black;
+  width: 200px;
+  padding: 5px 0px;
+  list-style: none;
+  margin: 0;
+}
+
+.action-icons-container ul {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.action-icons-container li {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.action-icons-container li:first-child {
+  background-color: rgb(197, 255, 197);
+}
+
+.active-edit-icon {
+  background-color: rgb(255, 255, 169);
+}
+
+.active-remove-icon {
+  background-color: rgb(255, 169, 169);
+}
