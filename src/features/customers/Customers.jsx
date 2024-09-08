@@ -2,9 +2,11 @@ import { Table } from "antd";
 import "antd/dist/reset.css";
 import "./customers.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
+import { useState } from "react";
 
 const Customers = ({ customers }) => {
-  // Definiši kolone za tabelu
+  const [selectedRowId, setSelectedRowId] = useState(null);
+
   const columns = [
     {
       title: "Name",
@@ -28,21 +30,37 @@ const Customers = ({ customers }) => {
     },
   ];
 
+  const handleRowClick = (record) => {
+    setSelectedRowId((prevSelectedRowId) =>
+      prevSelectedRowId === record.id ? null : record.id
+    );
+  };
+
   return (
     <div className="invoices-wrapper">
       <div className="header-container">
         <h2>CUSTOMERS</h2>
       </div>
       <div className="action-icons-container">
-        <ActionIcons />
+        <ActionIcons
+          selectedRowId={selectedRowId}
+          data={customers}
+          type="customer"
+        />
       </div>
       <div className="invoices-table-container">
         {customers.length > 0 ? (
           <Table
             dataSource={customers}
             columns={columns}
-            rowKey="id" // Jedinstveni identifikator za svaki red
-            pagination={{ pageSize: 5 }} // Broj redova po stranici
+            rowKey="id"
+            pagination={{ pageSize: 5 }}
+            onRow={(record) => ({
+              onClick: () => handleRowClick(record),
+            })}
+            rowClassName={(record) =>
+              record.id === selectedRowId ? "selected-row" : ""
+            }
           />
         ) : (
           <p>No customers available</p>

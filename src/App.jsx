@@ -15,12 +15,11 @@ const App = () => {
     const fetchData = async () => {
       const data = await ApiService();
       if (data) {
-        setInvoices(data.invoices || []);
-        setSellers(data.sellers || []);
-        setCustomers(data.customers || []);
+        setInvoices(data.invoices);
+        setSellers(data.sellers);
+        setCustomers(data.customers);
       }
     };
-
     fetchData();
   }, []);
 

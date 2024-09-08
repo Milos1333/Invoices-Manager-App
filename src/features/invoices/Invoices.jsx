@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Table } from "antd";
 import "antd/dist/reset.css";
 import "./invoices.style.css";
@@ -27,7 +27,7 @@ const Invoices = ({ invoices }) => {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
-      render: (amount) => `$${amount.toFixed(2)}`, // Formatiraj iznos kao valutu
+      render: (amount) => `$${amount.toFixed(2)}`,
     },
   ];
 
@@ -43,17 +43,21 @@ const Invoices = ({ invoices }) => {
         <h2>INVOICES</h2>
       </div>
       <div className="action-icons-container">
-        <ActionIcons selectedRowId={selectedRowId} />
+        <ActionIcons
+          selectedRowId={selectedRowId}
+          data={invoices}
+          type="invoice"
+        />
       </div>
       <div className="invoices-table-container">
         {invoices.length > 0 ? (
           <Table
             dataSource={invoices}
             columns={columns}
-            rowKey="id" // Jedinstveni identifikator za svaki red
-            pagination={{ pageSize: 5 }} // Broj redova po stranici
+            rowKey="id"
+            pagination={{ pageSize: 5 }}
             onRow={(record) => ({
-              onClick: () => handleRowClick(record), // Postavi ID aktivnog reda kada se klikne
+              onClick: () => handleRowClick(record),
             })}
             rowClassName={(record) =>
               record.id === selectedRowId ? "selected-row" : ""
