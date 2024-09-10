@@ -1,9 +1,9 @@
-import { Modal, Form, Input, InputNumber, Switch } from "antd";
+import { Modal, Form, Input, InputNumber, Switch, Select, message } from "antd";
 import { useEffect } from "react";
 import DateValidator from "../dateValidator/dateValidator";
 import "./createModal.style.css";
 
-const CreateModal = ({ isVisible, onClose, onCreate, type }) => {
+const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
   const [form] = Form.useForm();
 
   const handleModalClose = () => {
@@ -30,6 +30,9 @@ const CreateModal = ({ isVisible, onClose, onCreate, type }) => {
       });
   };
 
+  const sellers = data.sellers;
+  const customers = data.customers;
+
   const renderFormFields = () => {
     switch (type) {
       case "invoice":
@@ -40,8 +43,17 @@ const CreateModal = ({ isVisible, onClose, onCreate, type }) => {
               label="Seller Name"
               rules={[{ required: true, message: "Please enter seller name!" }]}
             >
-              <Input placeholder="Enter seller's name" />
+              <Select placeholder="Select seller">
+                {sellers
+                  .filter((seller) => seller.isActive) // Filter to show only active sellers
+                  .map((seller) => (
+                    <Select.Option key={seller.id} value={seller.companyName}>
+                      {seller.companyName}
+                    </Select.Option>
+                  ))}
+              </Select>
             </Form.Item>
+
             <Form.Item
               name="customerName"
               label="Customer Name"
@@ -49,7 +61,13 @@ const CreateModal = ({ isVisible, onClose, onCreate, type }) => {
                 { required: true, message: "Please enter customer name!" },
               ]}
             >
-              <Input placeholder="Enter customer's name" />
+              <Select placeholder="Select customer">
+                {customers.map((customer) => (
+                  <Select.Option key={customer.id} value={customer.name}>
+                    {customer.name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
             <DateValidator form={form} />
             <Form.Item
@@ -71,7 +89,6 @@ const CreateModal = ({ isVisible, onClose, onCreate, type }) => {
                 min={0}
                 style={{ width: "100%" }}
                 placeholder="Enter amount"
-                step={0.01}
               />
             </Form.Item>
           </>

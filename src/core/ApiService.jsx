@@ -1,8 +1,11 @@
-const ApiService = async () => {
+// src/core/ApiService.jsx
+
+const BASE_URL = "http://localhost:3000";
+
+// GET method to fetch data from a specific endpoint
+export const fetchData = async (endpoint) => {
   try {
-    const response = await fetch(
-      "https://run.mocky.io/v3/53723b67-57fc-4472-8d41-fd82d3a95641"
-    );
+    const response = await fetch(`${BASE_URL}/${endpoint}`);
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -14,4 +17,28 @@ const ApiService = async () => {
   }
 };
 
-export default ApiService;
+// POST method to send data to a specific endpoint
+export const postData = async (endpoint, payload) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to post data");
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error posting data:", error);
+    return null;
+  }
+};
+
+// Default export for general purpose fetch
+export default fetchData;

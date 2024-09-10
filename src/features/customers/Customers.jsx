@@ -4,7 +4,7 @@ import "./customers.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 import { useState } from "react";
 
-const Customers = ({ customers }) => {
+const Customers = ({ customers, setCustomers }) => {
   const [selectedRowId, setSelectedRowId] = useState(null);
 
   const columns = [
@@ -46,6 +46,7 @@ const Customers = ({ customers }) => {
           selectedRowId={selectedRowId}
           data={customers}
           type="customer"
+          setData={setCustomers}
         />
       </div>
       <div className="invoices-table-container">
