@@ -4,8 +4,14 @@ import "antd/dist/reset.css";
 import "./invoices.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 
-const Invoices = ({ invoices }) => {
+const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
   const [selectedRowId, setSelectedRowId] = useState(null);
+
+  const data = {
+    invoices: invoices,
+    sellers: sellers,
+    customers: customers,
+  };
 
   const columns = [
     {
@@ -45,8 +51,9 @@ const Invoices = ({ invoices }) => {
       <div className="action-icons-container">
         <ActionIcons
           selectedRowId={selectedRowId}
-          data={invoices}
+          data={data}
           type="invoice"
+          setData={setInvoices}
         />
       </div>
       <div className="invoices-table-container">
