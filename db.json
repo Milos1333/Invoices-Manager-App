@@ -5,7 +5,7 @@
       "customerName": "John Doe",
       "date": "2024-08-01",
       "amount": 346000,
-      "id": 1,
+      "id": "1",
       "sellerId": 3,
       "customerId": 7
     },
@@ -14,43 +14,25 @@
       "customerName": "Jane Smith",
       "date": "2024-08-02",
       "amount": 245000,
-      "id": 2,
+      "id": "2",
       "sellerId": 1,
       "customerId": 4
-    },
-    {
-      "sellerName": "Google",
-      "customerName": "Robert Brown",
-      "date": "2024-08-03",
-      "amount": 132000,
-      "id": 3,
-      "sellerId": 5,
-      "customerId": 2
     },
     {
       "sellerName": "Apple",
       "customerName": "Emily Davis",
       "date": "2024-08-04",
       "amount": 560000,
-      "id": 4,
+      "id": "4",
       "sellerId": 8,
       "customerId": 6
-    },
-    {
-      "sellerName": "Microsoft",
-      "customerName": "Michael Wilson",
-      "date": "2024-08-05",
-      "amount": 765000,
-      "id": 5,
-      "sellerId": 2,
-      "customerId": 8
     },
     {
       "sellerName": "Netflix",
       "customerName": "Linda Taylor",
       "date": "2024-08-06",
       "amount": 980000,
-      "id": 6,
+      "id": "6",
       "sellerId": 6,
       "customerId": 1
     },
@@ -59,7 +41,7 @@
       "customerName": "Chris Anderson",
       "date": "2024-08-07",
       "amount": 540000,
-      "id": 7,
+      "id": "7",
       "sellerId": 10,
       "customerId": 5
     },
@@ -68,7 +50,7 @@
       "customerName": "Nancy Martin",
       "date": "2024-08-08",
       "amount": 310000,
-      "id": 8,
+      "id": "8",
       "sellerId": 9,
       "customerId": 3
     },
@@ -77,7 +59,7 @@
       "customerName": "Paul White",
       "date": "2024-08-09",
       "amount": 430000,
-      "id": 9,
+      "id": "9",
       "sellerId": 4,
       "customerId": 10
     },
@@ -86,18 +68,36 @@
       "customerName": "Susan Harris",
       "date": "2024-08-10",
       "amount": 670000,
-      "id": 10,
+      "id": "10",
       "sellerId": 7,
       "customerId": 9
     },
     {
-      "id": 11,
+      "id": "11",
       "sellerName": "Facebook",
       "customerName": "John",
       "date": "2024-09-26",
       "amount": 44,
       "sellerId": 2,
       "customerId": 1
+    },
+    {
+      "id": "12",
+      "sellerName": "Google",
+      "customerName": "Robert",
+      "date": "2024-10-04",
+      "amount": 44444,
+      "sellerId": "3",
+      "customerId": null
+    },
+    {
+      "id": "13",
+      "sellerName": "Facebook",
+      "customerName": "Jane",
+      "date": "2024-10-09",
+      "amount": 334234,
+      "sellerId": "2",
+      "customerId": "2"
     }
   ],
   "sellers": [
@@ -105,156 +105,118 @@
       "companyName": "Amazon",
       "hqAddress": "Seattle, WA",
       "isActive": true,
-      "id": 1
+      "id": "1"
     },
     {
       "companyName": "Facebook",
       "hqAddress": "Menlo Park, CA",
       "isActive": true,
-      "id": 2
+      "id": "2"
     },
     {
       "companyName": "Google",
       "hqAddress": "Mountain View, CA",
       "isActive": true,
-      "id": 3
+      "id": "3"
     },
     {
       "companyName": "Apple",
       "hqAddress": "Cupertino, CA",
       "isActive": true,
-      "id": 4
+      "id": "4"
     },
     {
       "companyName": "Microsoft",
       "hqAddress": "Redmond, WA",
       "isActive": true,
-      "id": 5
+      "id": "5"
     },
     {
       "companyName": "Netflix",
       "hqAddress": "Los Gatos, CA",
       "isActive": true,
-      "id": 6
+      "id": "6"
     },
     {
       "companyName": "Tesla",
       "hqAddress": "Palo Alto, CA",
       "isActive": true,
-      "id": 7
+      "id": "7"
     },
     {
       "companyName": "Samsung",
       "hqAddress": "Seoul, South Korea",
       "isActive": true,
-      "id": 8
+      "id": "8"
     },
     {
       "companyName": "Sony",
       "hqAddress": "Tokyo, Japan",
       "isActive": true,
-      "id": 9
+      "id": "9"
     },
     {
       "companyName": "Intel",
       "hqAddress": "Santa Clara, CA",
       "isActive": true,
-      "id": 10
-    },
-    {
-      "id": 11,
-      "companyName": "3",
-      "hqAddress": "3",
-      "isActive": true
-    },
-    {
-      "id": 12,
-      "companyName": "ss",
-      "hqAddress": "ss",
-      "isActive": true
-    },
-    {
-      "id": 13,
-      "companyName": "sadads",
-      "hqAddress": "dsadas"
+      "id": "10"
     }
   ],
   "customers": [
-    {
-      "name": "John",
-      "surname": "Doe",
-      "address": "123 Main St, New York, NY",
-      "age": 35,
-      "id": 1
-    },
     {
       "name": "Jane",
       "surname": "Smith",
       "address": "456 Oak St, Chicago, IL",
       "age": 28,
-      "id": 2
-    },
-    {
-      "name": "Robert",
-      "surname": "Brown",
-      "address": "789 Pine St, Los Angeles, CA",
-      "age": 42,
-      "id": 3
-    },
-    {
-      "name": "Emily",
-      "surname": "Davis",
-      "address": "321 Maple St, Houston, TX",
-      "age": 30,
-      "id": 4
+      "id": "2"
     },
     {
       "name": "Michael",
       "surname": "Wilson",
       "address": "654 Cedar St, Phoenix, AZ",
       "age": 38,
-      "id": 5
-    },
-    {
-      "name": "Linda",
-      "surname": "Taylor",
-      "address": "987 Birch St, Philadelphia, PA",
-      "age": 33,
-      "id": 6
-    },
-    {
-      "name": "Chris",
-      "surname": "Anderson",
-      "address": "159 Elm St, San Diego, CA",
-      "age": 29,
-      "id": 7
+      "id": "5"
     },
     {
       "name": "Nancy",
       "surname": "Martin",
       "address": "753 Willow St, Dallas, TX",
       "age": 40,
-      "id": 8
+      "id": "8"
     },
     {
       "name": "Paul",
       "surname": "White",
       "address": "258 Fir St, San Jose, CA",
       "age": 45,
-      "id": 9
+      "id": "9"
     },
     {
       "name": "Susan",
       "surname": "Harris",
       "address": "147 Ash St, Austin, TX",
       "age": 36,
-      "id": 10
+      "id": "10"
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "s",
       "surname": "a",
       "address": "dsds",
+      "age": 33
+    },
+    {
+      "id": "12",
+      "name": "Milos ",
+      "surname": "Klepannnn",
+      "address": "sdasdads",
+      "age": 44
+    },
+    {
+      "id": "13",
+      "name": "Mma",
+      "surname": "a",
+      "address": "sdadsa",
       "age": 33
     }
   ]

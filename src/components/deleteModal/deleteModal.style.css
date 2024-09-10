@@ -1,0 +1,43 @@
+.delete-wrap .ant-modal-content {
+  width: 300px;
+  margin: auto;
+  margin-top: 150px;
+  transform: scale(0.9);
+}
+
+.delete-wrap .ant-modal-title {
+  text-align: center;
+}
+
+.delete-wrap .ant-modal-footer {
+  padding: 10px 0 5px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-wrap .ant-modal-footer button {
+  width: 45%;
+}
+
+.delete-wrap .ant-modal-footer button:first-child {
+  background-color: rgb(255, 213, 213);
+  border: 1px solid red;
+  color: black;
+}
+
+.delete-wrap .ant-modal-footer button:first-child:hover {
+  background-color: rgb(255, 189, 189);
+  color: black;
+}
+
+.delete-wrap .ant-modal-footer button:last-child {
+  background-color: rgb(221, 221, 221);
+  border: 1px solid rgb(0, 0, 0);
+  color: black;
+}
+
+.delete-wrap .ant-modal-footer button:last-child:hover {
+  background-color: rgb(204, 204, 204);
+  color: black;
+  border: 1px solid rgb(0, 0, 0);
+}

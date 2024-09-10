@@ -181,6 +181,7 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
       onCancel={handleModalClose}
       okText="Create"
       cancelText="Discard"
+      wrapClassName="create-wrap"
     >
       <Form form={form} layout="vertical">
         {renderFormFields()}
