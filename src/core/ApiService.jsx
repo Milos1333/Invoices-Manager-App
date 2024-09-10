@@ -1,8 +1,5 @@
-// src/core/ApiService.jsx
-
 const BASE_URL = "http://localhost:3000";
 
-// GET method to fetch data from a specific endpoint
 export const fetchData = async (endpoint) => {
   try {
     const response = await fetch(`${BASE_URL}/${endpoint}`);
@@ -17,7 +14,6 @@ export const fetchData = async (endpoint) => {
   }
 };
 
-// POST method to send data to a specific endpoint
 export const postData = async (endpoint, payload) => {
   try {
     const response = await fetch(`${BASE_URL}/${endpoint}`, {
@@ -40,5 +36,19 @@ export const postData = async (endpoint, payload) => {
   }
 };
 
-// Default export for general purpose fetch
-export default fetchData;
+export const deleteData = async (endpoint, id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete data");
+    }
+
+    return true; // Uspešno obrisano
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    return false; // Brisanje nije uspelo
+  }
+};

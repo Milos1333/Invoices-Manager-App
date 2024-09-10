@@ -1,54 +1,54 @@
-.ant-modal-wrap {
+.create-wrap {
   overflow: none;
 }
 
-.ant-modal-content {
+.create-wrap .ant-modal-content {
   transform: scale(0.85);
   margin: 0 auto;
   width: 400px;
 }
 
-.ant-modal-title {
+.create-wrap .ant-modal-title {
   text-align: center;
   padding-bottom: 10px;
 }
 
-.ant-form-item-required {
+.create-wrap .ant-form-item-required {
   font-weight: 600;
 }
 
-.ant-form-item-required::before {
+.create-wrap .ant-form-item-required::before {
   display: none !important;
 }
 
-.ant-modal-footer {
+.create-wrap .ant-modal-footer {
   display: flex;
   justify-content: space-around;
   padding: 10px 0 !important;
 }
 
-.ant-modal-footer button {
+.create-wrap .ant-modal-footer button {
   width: 40%;
 }
 
-.ant-modal-footer button:first-child {
+.create-wrap .ant-modal-footer button:first-child {
   background-color: rgb(253, 255, 215);
   border: 1px solid rgb(181, 181, 0);
 }
 
-.ant-modal-footer button:first-child:hover {
+.create-wrap .ant-modal-footer button:first-child:hover {
   background-color: rgb(255, 255, 183) !important;
   border: 1px solid rgb(181, 181, 0) !important;
   color: black !important;
 }
 
-.ant-modal-footer button:last-child {
+.create-wrap .ant-modal-footer button:last-child {
   background-color: rgb(225, 255, 235);
   border: 1px solid rgb(0, 114, 25);
   color: black;
 }
 
-.ant-modal-footer button:last-child:hover {
+.create-wrap .ant-modal-footer button:last-child:hover {
   background-color: rgb(202, 255, 198) !important;
   border: 1px solid rgb(0, 114, 25) !important;
   color: black !important;

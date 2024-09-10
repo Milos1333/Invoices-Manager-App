@@ -1,40 +1,39 @@
-// src/components/actionIcons/ActionIcons.jsx
-
 import { useState } from "react";
 import removeIcon from "../../assets/remove.png";
 import editIcon from "../../assets/edit.png";
 import addIcon from "../../assets/add.png";
 import "./actionIcons.style.css";
 import CreateModal from "../createModal/CreateModal";
-import { postData } from "../../core/ApiService"; // Import postData
+import DeleteModal from "../deleteModal/DeleteModal"; // Import the DeleteModal
+import { postData, deleteData } from "../../core/ApiService";
 
 const ActionIcons = ({ selectedRowId, data, type, setData }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  const showCreateModal = () => {
+    setIsCreateModalVisible(true);
   };
 
-  const getEntityData = () => {
-    if (type === "invoice") {
-      return data.invoices;
+  const showDeleteModal = () => {
+    if (selectedRowId) {
+      setIsDeleteModalVisible(true);
     }
-    return data;
-  };
-
-  const getNextId = (entityData) => {
-    if (entityData.length === 0) return 1;
-    const maxId = entityData.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    return maxId + 1;
   };
 
   const handleCreate = async (newEntity) => {
-    const entityData = getEntityData();
-
+    let entityData = data[type + "s"];
     let entityWithId;
+
+    const getNextId = (entityData) => {
+      if (entityData.length === 0) return "1";
+      const maxId = entityData.reduce(
+        (max, item) => (Number(item.id) > Number(max) ? item.id : max),
+        "0"
+      );
+      return (Number(maxId) + 1).toString();
+    };
+
     if (type === "invoice") {
       const selectedSeller = data.sellers.find(
         (seller) => seller.companyName === newEntity.sellerName
@@ -43,19 +42,18 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
         (customer) => customer.name === newEntity.customerName
       );
 
-      // Format date before saving
       const formattedDate = newEntity.date.format("YYYY-MM-DD");
 
       entityWithId = {
         ...newEntity,
         id: getNextId(entityData),
         date: formattedDate,
-        sellerId: selectedSeller ? selectedSeller.id : null,
-        customerId: selectedCustomer ? selectedCustomer.id : null,
+        sellerId: selectedSeller.id,
+        customerId: selectedCustomer.id,
       };
 
-      // Post data to API
-      const result = await postData("invoices", entityWithId);
+      let result = await postData("invoices", entityWithId);
+
       if (result) {
         setData((prevData) => [...prevData, result]);
       }
@@ -63,10 +61,11 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
       entityWithId = {
         ...newEntity,
         id: getNextId(entityData),
+        isActive: newEntity.isActive ?? false,
       };
 
-      // Post data to API
-      const result = await postData("sellers", entityWithId);
+      let result = await postData("sellers", entityWithId);
+
       if (result) {
         setData((prevData) => [...prevData, result]);
       }
@@ -76,40 +75,68 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
         id: getNextId(entityData),
       };
 
-      // Post data to API
-      const result = await postData("customers", entityWithId);
+      let result = await postData("customers", entityWithId);
       if (result) {
         setData((prevData) => [...prevData, result]);
       }
     }
 
-    setIsModalVisible(false);
+    setIsCreateModalVisible(false);
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const handleDelete = async () => {
+    if (!selectedRowId) return;
+    let result = false;
+
+    if (type === "invoice") {
+      result = await deleteData("invoices", selectedRowId);
+    } else if (type === "seller") {
+      result = await deleteData("sellers", selectedRowId);
+    } else if (type === "customer") {
+      result = await deleteData("customers", selectedRowId);
+    }
+
+    if (result) {
+      setData((prevData) =>
+        prevData.filter((item) => item.id !== selectedRowId)
+      );
+    }
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalVisible(false);
   };
 
   return (
     <>
       <ul className="action-icons-container">
-        <li onClick={showModal}>
+        <li onClick={showCreateModal}>
           <img src={addIcon} width="21px" alt="Add Icon" />
         </li>
         <li className={selectedRowId ? "active-edit-icon" : ""}>
           <img src={editIcon} width="20px" alt="Edit Icon" />
         </li>
-        <li className={selectedRowId ? "active-remove-icon" : ""}>
+        <li
+          className={selectedRowId ? "active-remove-icon" : ""}
+          onClick={showDeleteModal} // Show delete confirmation modal
+        >
           <img src={removeIcon} width="18px" alt="Remove Icon" />
         </li>
       </ul>
 
       <CreateModal
-        isVisible={isModalVisible}
-        onClose={handleCancel}
+        isVisible={isCreateModalVisible}
+        onClose={() => setIsCreateModalVisible(false)}
         onCreate={handleCreate}
         type={type}
         data={data}
+      />
+
+      <DeleteModal
+        isVisible={isDeleteModalVisible}
+        onConfirm={handleDelete} // Confirm delete action
+        onCancel={handleCancelDelete} // Cancel delete action
       />
     </>
   );
