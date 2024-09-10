@@ -4,7 +4,7 @@ import editIcon from "../../assets/edit.png";
 import addIcon from "../../assets/add.png";
 import "./actionIcons.style.css";
 import CreateModal from "../createModal/CreateModal";
-import DeleteModal from "../deleteModal/DeleteModal"; // Import the DeleteModal
+import DeleteModal from "../deleteModal/DeleteModal";
 import { postData, deleteData } from "../../core/ApiService";
 
 const ActionIcons = ({ selectedRowId, data, type, setData }) => {
@@ -20,6 +20,8 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
       setIsDeleteModalVisible(true);
     }
   };
+
+  // Function to create a new entity
 
   const handleCreate = async (newEntity) => {
     let entityData = data[type + "s"];
@@ -84,6 +86,8 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
     setIsCreateModalVisible(false);
   };
 
+  // Function for deleting an existing entity
+
   const handleDelete = async () => {
     if (!selectedRowId) return;
     let result = false;
@@ -104,10 +108,6 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
     setIsDeleteModalVisible(false);
   };
 
-  const handleCancelDelete = () => {
-    setIsDeleteModalVisible(false);
-  };
-
   return (
     <>
       <ul className="action-icons-container">
@@ -119,7 +119,7 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
         </li>
         <li
           className={selectedRowId ? "active-remove-icon" : ""}
-          onClick={showDeleteModal} // Show delete confirmation modal
+          onClick={showDeleteModal}
         >
           <img src={removeIcon} width="18px" alt="Remove Icon" />
         </li>
@@ -135,8 +135,8 @@ const ActionIcons = ({ selectedRowId, data, type, setData }) => {
 
       <DeleteModal
         isVisible={isDeleteModalVisible}
-        onConfirm={handleDelete} // Confirm delete action
-        onCancel={handleCancelDelete} // Cancel delete action
+        onConfirm={handleDelete}
+        onCancel={() => setIsDeleteModalVisible(false)}
       />
     </>
   );

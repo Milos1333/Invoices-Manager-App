@@ -1,24 +1,6 @@
 {
   "invoices": [
     {
-      "sellerName": "Amazon",
-      "customerName": "John Doe",
-      "date": "2024-08-01",
-      "amount": 346000,
-      "id": "1",
-      "sellerId": 3,
-      "customerId": 7
-    },
-    {
-      "sellerName": "Facebook",
-      "customerName": "Jane Smith",
-      "date": "2024-08-02",
-      "amount": 245000,
-      "id": "2",
-      "sellerId": 1,
-      "customerId": 4
-    },
-    {
       "sellerName": "Apple",
       "customerName": "Emily Davis",
       "date": "2024-08-04",
@@ -73,15 +55,6 @@
       "customerId": 9
     },
     {
-      "id": "11",
-      "sellerName": "Facebook",
-      "customerName": "John",
-      "date": "2024-09-26",
-      "amount": 44,
-      "sellerId": 2,
-      "customerId": 1
-    },
-    {
       "id": "12",
       "sellerName": "Google",
       "customerName": "Robert",
@@ -89,15 +62,6 @@
       "amount": 44444,
       "sellerId": "3",
       "customerId": null
-    },
-    {
-      "id": "13",
-      "sellerName": "Facebook",
-      "customerName": "Jane",
-      "date": "2024-10-09",
-      "amount": 334234,
-      "sellerId": "2",
-      "customerId": "2"
     }
   ],
   "sellers": [
@@ -185,13 +149,6 @@
       "id": "8"
     },
     {
-      "name": "Paul",
-      "surname": "White",
-      "address": "258 Fir St, San Jose, CA",
-      "age": 45,
-      "id": "9"
-    },
-    {
       "name": "Susan",
       "surname": "Harris",
       "address": "147 Ash St, Austin, TX",
@@ -211,13 +168,6 @@
       "surname": "Klepannnn",
       "address": "sdasdads",
       "age": 44
-    },
-    {
-      "id": "13",
-      "name": "Mma",
-      "surname": "a",
-      "address": "sdadsa",
-      "age": 33
     }
   ]
 }
