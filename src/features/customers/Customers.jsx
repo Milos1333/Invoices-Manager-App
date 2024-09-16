@@ -4,7 +4,7 @@ import "./customers.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 import { useState } from "react";
 
-const Customers = ({ customers, setCustomers }) => {
+const Customers = ({ customers, setCustomers, invoices, setInvoices }) => {
   const [selectedRowId, setSelectedRowId] = useState(null);
 
   const columns = [
@@ -44,9 +44,10 @@ const Customers = ({ customers, setCustomers }) => {
       <div className="action-icons-container">
         <ActionIcons
           selectedRowId={selectedRowId}
-          data={customers}
+          data={{ customers, invoices }}
           type="customer"
           setData={setCustomers}
+          setInvoices={setInvoices}
         />
       </div>
       <div className="invoices-table-container">
@@ -64,7 +65,7 @@ const Customers = ({ customers, setCustomers }) => {
             }
           />
         ) : (
-          <p>No customers available</p>
+          <p style={{ textAlign: "center" }}>No customers available</p>
         )}
       </div>
     </div>
