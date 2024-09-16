@@ -71,7 +71,7 @@ const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
             }
           />
         ) : (
-          <p>No invoices available</p>
+          <p style={{ textAlign: "center" }}>No invoices available</p>
         )}
       </div>
     </div>

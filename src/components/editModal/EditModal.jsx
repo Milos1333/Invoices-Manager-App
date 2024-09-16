@@ -1,32 +1,54 @@
-import { Modal, Form, Input, InputNumber, Switch, Select } from "antd";
+import { Modal, Form, Input, InputNumber, Switch, Select, message } from "antd";
 import { useEffect } from "react";
-import DateValidator from "../dateValidator/DateValidator";
-import "./createModal.style.css";
+import "./editModal.style.css";
 
-const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
+const EditModal = ({
+  isVisible,
+  onClose,
+  onEdit,
+  type,
+  data,
+  initialValues,
+}) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (isVisible && initialValues) {
+      form.setFieldsValue({
+        ...initialValues,
+      });
+    }
+  }, [isVisible, form, initialValues, data]);
 
   const handleModalClose = () => {
     form.resetFields();
     onClose();
   };
 
-  useEffect(() => {
-    if (!isVisible) {
-      form.resetFields();
-    }
-  }, [isVisible, form]);
-
   const handleOk = () => {
     form
       .validateFields()
       .then((values) => {
-        onCreate(values);
+        const updatedValues = { ...values };
+
+        if (type === "invoice") {
+          const seller = data.sellers.find(
+            (s) => s.companyName === values.sellerName
+          );
+          const customer = data.customers.find(
+            (c) => c.name === values.customerName
+          );
+
+          updatedValues.sellerId = seller ? seller.id : null;
+          updatedValues.customerId = customer ? customer.id : null;
+        }
+
+        onEdit(updatedValues);
         form.resetFields();
         onClose();
       })
       .catch((info) => {
-        console.log("Validate Failed:", info);
+        console.log("Validation failed:", info);
       });
   };
 
@@ -41,9 +63,11 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
             <Form.Item
               name="sellerName"
               label="Seller Name"
-              rules={[{ required: true, message: "Please enter seller name!" }]}
+              rules={[
+                { required: true, message: "Please enter the seller's name!" },
+              ]}
             >
-              <Select placeholder="Select seller">
+              <Select placeholder="Select Seller">
                 {sellers
                   .filter((seller) => seller.isActive)
                   .map((seller) => (
@@ -58,10 +82,13 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
               name="customerName"
               label="Customer Name"
               rules={[
-                { required: true, message: "Please enter customer name!" },
+                {
+                  required: true,
+                  message: "Please enter the customer's name!",
+                },
               ]}
             >
-              <Select placeholder="Select customer">
+              <Select placeholder="Select Customer">
                 {customers.map((customer) => (
                   <Select.Option key={customer.id} value={customer.name}>
                     {customer.name}
@@ -70,13 +97,11 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
               </Select>
             </Form.Item>
 
-            <DateValidator />
-
             <Form.Item
               name="amount"
               label="Amount"
               rules={[
-                { required: true, message: "Please enter amount!" },
+                { required: true, message: "Please enter the amount!" },
                 {
                   validator: (_, value) => {
                     if (value <= 0) {
@@ -102,17 +127,22 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
               name="companyName"
               label="Company Name"
               rules={[
-                { required: true, message: "Please enter company name!" },
+                { required: true, message: "Please enter the company name!" },
               ]}
             >
               <Input placeholder="Enter company name" />
             </Form.Item>
             <Form.Item
               name="hqAddress"
-              label="HQ Address"
-              rules={[{ required: true, message: "Please enter address!" }]}
+              label="Headquarters Address"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the headquarters address!",
+                },
+              ]}
             >
-              <Input placeholder="Enter HQ address" />
+              <Input placeholder="Enter headquarters address" />
             </Form.Item>
             <Form.Item name="isActive" label="Active" valuePropName="checked">
               <Switch />
@@ -124,26 +154,32 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
           <>
             <Form.Item
               name="name"
-              label="Name"
+              label="First Name"
               rules={[
-                { required: true, message: "Please enter customer name!" },
+                {
+                  required: true,
+                  message: "Please enter the customer's first name!",
+                },
               ]}
             >
-              <Input placeholder="Enter customer's first name" />
+              <Input placeholder="Enter first name" />
             </Form.Item>
             <Form.Item
               name="surname"
-              label="Surname"
+              label="Last Name"
               rules={[
-                { required: true, message: "Please enter customer surname!" },
+                {
+                  required: true,
+                  message: "Please enter the customer's last name!",
+                },
               ]}
             >
-              <Input placeholder="Enter customer's surname" />
+              <Input placeholder="Enter last name" />
             </Form.Item>
             <Form.Item
               name="address"
               label="Address"
-              rules={[{ required: true, message: "Please enter address!" }]}
+              rules={[{ required: true, message: "Please enter the address!" }]}
             >
               <Input placeholder="Enter address" />
             </Form.Item>
@@ -151,7 +187,7 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
               name="age"
               label="Age"
               rules={[
-                { required: true, message: "Please enter age!" },
+                { required: true, message: "Please enter the age!" },
                 {
                   validator: (_, value) => {
                     if (value < 18) {
@@ -177,12 +213,12 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
 
   return (
     <Modal
-      title={`Create an ${type}`}
+      title={`Edit ${type}`}
       open={isVisible}
       onOk={handleOk}
       onCancel={handleModalClose}
-      okText="Create"
-      cancelText="Discard"
+      okText="Save"
+      cancelText="Cancel"
       wrapClassName="create-edit-wrap"
     >
       <Form form={form} layout="vertical">
@@ -192,4 +228,4 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
   );
 };
 
-export default CreateModal;
+export default EditModal;

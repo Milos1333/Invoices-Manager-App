@@ -36,6 +36,28 @@ export const postData = async (endpoint, payload) => {
   }
 };
 
+export const putData = async (endpoint, id, payload) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update data");
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error updating data:", error);
+    return null;
+  }
+};
+
 export const deleteData = async (endpoint, id) => {
   try {
     const response = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
@@ -46,9 +68,9 @@ export const deleteData = async (endpoint, id) => {
       throw new Error("Failed to delete data");
     }
 
-    return true; // Uspešno obrisano
+    return true;
   } catch (error) {
     console.error("Error deleting data:", error);
-    return false; // Brisanje nije uspelo
+    return false;
   }
 };

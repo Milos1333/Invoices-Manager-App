@@ -1,8 +1,6 @@
-// src/App.jsx
-
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { fetchData } from "./core/ApiService"; // Import the fetchData function
+import { fetchData } from "./core/ApiService";
 import Customers from "./features/customers/Customers";
 import Sellers from "./features/sellers/Sellers";
 import Invoices from "./features/invoices/Invoices";
@@ -23,6 +21,8 @@ const App = () => {
         setInvoices(invoicesData);
         setSellers(sellersData);
         setCustomers(customersData);
+      } else {
+        return;
       }
     };
 
@@ -47,12 +47,24 @@ const App = () => {
           />
           <Route
             path="/sellers"
-            element={<Sellers sellers={sellers} setSellers={setSellers} />}
+            element={
+              <Sellers
+                sellers={sellers}
+                setSellers={setSellers}
+                invoices={invoices}
+                setInvoices={setInvoices}
+              />
+            }
           />
           <Route
             path="/customers"
             element={
-              <Customers customers={customers} setCustomers={setCustomers} />
+              <Customers
+                customers={customers}
+                setCustomers={setCustomers}
+                invoices={invoices}
+                setInvoices={setInvoices}
+              />
             }
           />
         </Routes>
