@@ -2,10 +2,11 @@ import { useState } from "react";
 import removeIcon from "../../../assets/remove.png";
 import DeleteModal from "../../deleteModal/DeleteModal";
 import { deleteData } from "../../../core/ApiService";
+import { useNotificationStore } from "../../../stores/notification.store";
 
-const DeleteIcon = ({ selectedRowId, type, setData, data }) => {
+const DeleteIcon = ({ selectedRowId, type, setData, data, setSelectedRow }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [notification, setNotification] = useState("");
+  const { setNotification } = useNotificationStore();
 
   const showDeleteModal = () => {
     if (selectedRowId) {
@@ -25,7 +26,11 @@ const DeleteIcon = ({ selectedRowId, type, setData, data }) => {
 
       if (hasAssociatedInvoices) {
         setNotification(
-          "Cannot delete seller. Please remove all associated invoices first."
+          true,
+          "warning",
+          "Cannot Delete Seller",
+          "Please remove all associated invoices first.",
+          "#fff3cd"
         );
         setIsDeleteModalVisible(false);
         return;
@@ -39,7 +44,11 @@ const DeleteIcon = ({ selectedRowId, type, setData, data }) => {
 
       if (hasAssociatedInvoices) {
         setNotification(
-          "Cannot delete customer. Please remove all associated invoices first."
+          true,
+          "warning",
+          "Cannot Delete Customer",
+          "Please remove all associated invoices first.",
+          "#fff3cd"
         );
         setIsDeleteModalVisible(false);
         return;
@@ -52,9 +61,34 @@ const DeleteIcon = ({ selectedRowId, type, setData, data }) => {
       setData((prevData) =>
         prevData.filter((item) => item.id !== selectedRowId)
       );
+
+      setNotification(
+        true,
+        "success",
+        `${type.charAt(0).toUpperCase() + type.slice(1)} Deleted`,
+        `${
+          type.charAt(0).toUpperCase() + type.slice(1)
+        } has been successfully deleted.`,
+        "#d5ffd0"
+      );
+
+      setSelectedRow(null);
+    } else {
+      setNotification(
+        true,
+        "error",
+        "Deletion Failed",
+        "An error occurred while trying to delete the item.",
+        "#f5c6c6"
+      );
     }
 
     setIsDeleteModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsDeleteModalVisible(false);
+    setSelectedRow(null);
   };
 
   return (
@@ -68,8 +102,7 @@ const DeleteIcon = ({ selectedRowId, type, setData, data }) => {
       <DeleteModal
         isVisible={isDeleteModalVisible}
         onConfirm={handleDelete}
-        onCancel={() => setIsDeleteModalVisible(false)}
-        notification={notification}
+        onCancel={handleCancel}
       />
     </>
   );

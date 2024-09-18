@@ -1,6 +1,5 @@
 import { Modal, Form, Input, InputNumber, Switch, Select } from "antd";
 import { useEffect } from "react";
-import DateValidator from "../dateValidator/DateValidator";
 import "./createModal.style.css";
 
 const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
@@ -70,7 +69,28 @@ const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
               </Select>
             </Form.Item>
 
-            <DateValidator />
+            <Form.Item
+              name="date"
+              label="Invoice Date"
+              rules={[
+                { required: true, message: "Please select the invoice date!" },
+                () => ({
+                  validator(_, value) {
+                    const selectedDate = new Date(value).setHours(0, 0, 0, 0); // Postavljamo vreme na 0 da se uporedi samo datum
+                    const today = new Date().setHours(0, 0, 0, 0); // Danasnji dan bez vremena
+
+                    if (!value || selectedDate <= today) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error("Invoice date cannot be in the future!")
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input type="date" placeholder="Select invoice date" />
+            </Form.Item>
 
             <Form.Item
               name="amount"

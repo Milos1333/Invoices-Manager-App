@@ -1,51 +1,48 @@
 {
   "invoices": [
     {
-      "sellerName": "Facebook",
-      "customerName": "Milos",
-      "amount": 33,
-      "sellerId": "1",
-      "customerId": "1",
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "sellerName": "Youtube",
-      "customerName": "Milos",
-      "date": "2024-09-25",
-      "amount": 222,
-      "sellerId": "2",
+      "id": "1",
+      "sellerName": "324324s",
+      "customerName": "Milosee",
+      "date": "2024-09-09",
+      "amount": 333,
+      "sellerId": "3",
       "customerId": "1"
     }
   ],
   "sellers": [
     {
-      "companyName": "Facebook",
-      "hqAddress": "Kdmsksadmkdasd",
+      "companyName": "Youtubeeee",
+      "hqAddress": "Ddsdaadsasd",
       "isActive": true,
-      "id": "1"
+      "id": "2"
     },
     {
-      "companyName": "Youtube",
-      "hqAddress": "Ddsdaadsasd",
+      "companyName": "324324s",
+      "hqAddress": "32424333",
+      "isActive": true,
+      "id": "3"
+    },
+    {
+      "companyName": "33",
+      "hqAddress": "33sdasd",
       "isActive": false,
-      "id": "2"
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "companyName": "sdaads",
+      "hqAddress": "sdd",
+      "isActive": true
     }
   ],
   "customers": [
     {
-      "id": "1",
-      "name": "Milos",
-      "surname": "Klepic",
+      "name": "Milosee",
+      "surname": "Klepicc",
       "address": "Jovana Raskovica",
-      "age": 25
-    },
-    {
-      "id": "2",
-      "name": "Jovan",
-      "surname": "Klepic",
-      "address": "Jovana Raskovica",
-      "age": 34
+      "age": 25,
+      "id": "1"
     }
   ]
 }

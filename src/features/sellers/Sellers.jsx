@@ -48,6 +48,7 @@ const Sellers = ({ sellers, setSellers, invoices, setInvoices }) => {
           type="seller"
           setData={setSellers}
           setInvoices={setInvoices}
+          setSelectedRow={setSelectedRowId}
         />
       </div>
       <div className="invoices-table-container">
