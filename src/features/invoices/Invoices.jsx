@@ -54,6 +54,7 @@ const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
           data={data}
           type="invoice"
           setData={setInvoices}
+          setSelectedRow={setSelectedRowId}
         />
       </div>
       <div className="invoices-table-container">
