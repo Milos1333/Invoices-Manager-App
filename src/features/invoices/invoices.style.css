@@ -44,6 +44,9 @@
   border-radius: 0 !important;
 }
 
+.ant-table-tbody tr:hover {
+  background-color: rgba(186, 207, 255, 0.091);
+}
 .ant-table-tbody tr {
   cursor: pointer;
 }

@@ -75,6 +75,19 @@ const EditIcon = ({
         );
 
         setInvoices(updatedInvoices);
+
+        await Promise.all(
+          updatedInvoices.map(async (invoice) => {
+            const updatedInvoice = await putData(
+              "invoices",
+              invoice.id,
+              invoice
+            );
+            if (!updatedInvoice) {
+              throw new Error("Failed to update invoice on the server.");
+            }
+          })
+        );
       } else if (type === "customer") {
         const updatedCustomers = data.customers.map((customer) =>
           selectedEntities.some((entity) => entity.id === customer.id)
@@ -89,6 +102,19 @@ const EditIcon = ({
             : invoice
         );
         setInvoices(updatedInvoices);
+
+        await Promise.all(
+          updatedInvoices.map(async (invoice) => {
+            const updatedInvoice = await putData(
+              "invoices",
+              invoice.id,
+              invoice
+            );
+            if (!updatedInvoice) {
+              throw new Error("Failed to update invoice on the server.");
+            }
+          })
+        );
       } else if (type === "invoice") {
         const updatedInvoices = data.invoices.map((invoice) =>
           selectedEntities.some((entity) => invoice.id === entity.id)

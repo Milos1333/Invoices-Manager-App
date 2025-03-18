@@ -3,7 +3,7 @@
     {
       "id": "1",
       "sellerName": "Smart Builders",
-      "customerName": "Milosaa",
+      "customerName": "Milos",
       "date": "2025-03-04",
       "amount": 3333,
       "sellerId": "5",
@@ -12,7 +12,7 @@
   ],
   "sellers": [
     {
-      "companyName": "Tech Innovatorsssa",
+      "companyName": "Tech Innovat",
       "hqAddress": "123 Silicon Valley, CA",
       "isActive": true,
       "id": "1"
@@ -24,13 +24,13 @@
       "isActive": false
     },
     {
-      "companyName": "HealthCare Plusss",
-      "hqAddress": "101 Wellness Road, S",
+      "companyName": "HealthCare Plus",
+      "hqAddress": "101 Wellness Road, SA",
       "isActive": true,
       "id": "4"
     },
     {
-      "companyName": "Smart Builderssssss",
+      "companyName": "Smart Builders",
       "hqAddress": "202 Construction Ave, TX",
       "isActive": true,
       "id": "5"
@@ -44,32 +44,11 @@
   ],
   "customers": [
     {
-      "name": "Milosaa",
+      "name": "Milos",
       "surname": "Klepic",
       "address": "Jovana Ducica 15",
-      "age": 21,
+      "age": 22,
       "id": "1"
-    },
-    {
-      "name": "Adrijanaaaaaa",
-      "surname": "Klepic",
-      "address": "Petra Kocica",
-      "age": 25,
-      "id": "2"
-    },
-    {
-      "name": "Andreaaaaaaaaa",
-      "surname": "Visekruna",
-      "address": "Save Bubica",
-      "age": 34,
-      "id": "3"
-    },
-    {
-      "id": "4",
-      "name": "Violeta",
-      "surname": "Jagodic",
-      "address": "Sime Solaje",
-      "age": 56
     },
     {
       "id": "5",
@@ -79,11 +58,11 @@
       "age": 25
     },
     {
-      "id": "6",
       "name": "Sinisa ",
-      "surname": "Lazendic",
+      "surname": "Jovandic",
       "address": "123 Main St, Springfield, IL",
-      "age": 33
+      "age": 33,
+      "id": "6"
     }
   ]
 }

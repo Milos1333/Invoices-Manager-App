@@ -72,7 +72,7 @@ const CreateIcon = ({
             "success",
             "Invoice Created",
             "The invoice has been successfully created.",
-            "#d5ffd0" // Light green color for success
+            "#d5ffd0"
           );
         }
       } else if (type === "seller") {
@@ -91,7 +91,7 @@ const CreateIcon = ({
             "success",
             "Seller Created",
             "The seller has been successfully created.",
-            "#d5ffd0" // Light green color for success
+            "#d5ffd0"
           );
         }
       } else if (type === "customer") {
@@ -108,7 +108,7 @@ const CreateIcon = ({
             "success",
             "Customer Created",
             "The customer has been successfully created.",
-            "#d5ffd0" // Light green color for success
+            "#d5ffd0"
           );
         }
       }
@@ -118,11 +118,11 @@ const CreateIcon = ({
         "error",
         "Creation Failed",
         "An error occurred while creating the entity.",
-        "#f5c6c6" // Light red color for error
+        "#f5c6c6"
       );
     }
     setIsCreateModalVisible(false);
-    setSelectedRowIds([]); // Reset selected rows after creation
+    setSelectedRowIds([]);
   };
 
   // Function to show the modal for creating a new entity
