@@ -5,7 +5,7 @@ import "./invoices.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 
 const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
-  const [selectedRowId, setSelectedRowId] = useState(null);
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   const data = {
     invoices: invoices,
@@ -37,10 +37,14 @@ const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
     },
   ];
 
+  // Handle row click for multiple selections
   const handleRowClick = (record) => {
-    setSelectedRowId((prevSelectedRowId) =>
-      prevSelectedRowId === record.id ? null : record.id
-    );
+    setSelectedRowIds((prevSelectedRowIds) => {
+      if (prevSelectedRowIds.includes(record.id)) {
+        return prevSelectedRowIds.filter((id) => id !== record.id);
+      }
+      return [...prevSelectedRowIds, record.id];
+    });
   };
 
   return (
@@ -50,11 +54,11 @@ const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
       </div>
       <div className="action-icons-container">
         <ActionIcons
-          selectedRowId={selectedRowId}
+          selectedRowIds={selectedRowIds}
           data={data}
           type="invoice"
           setData={setInvoices}
-          setSelectedRow={setSelectedRowId}
+          setSelectedRowIds={setSelectedRowIds}
         />
       </div>
       <div className="invoices-table-container">
@@ -68,7 +72,7 @@ const Invoices = ({ invoices, sellers, customers, setInvoices }) => {
               onClick: () => handleRowClick(record),
             })}
             rowClassName={(record) =>
-              record.id === selectedRowId ? "selected-row" : ""
+              selectedRowIds.includes(record.id) ? "selected-row" : ""
             }
           />
         ) : (

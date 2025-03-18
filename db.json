@@ -2,47 +2,88 @@
   "invoices": [
     {
       "id": "1",
-      "sellerName": "324324s",
-      "customerName": "Milosee",
-      "date": "2024-09-09",
-      "amount": 333,
-      "sellerId": "3",
+      "sellerName": "Smart Builders",
+      "customerName": "Milosaa",
+      "date": "2025-03-04",
+      "amount": 3333,
+      "sellerId": "5",
       "customerId": "1"
     }
   ],
   "sellers": [
     {
-      "companyName": "Youtubeeee",
-      "hqAddress": "Ddsdaadsasd",
+      "companyName": "Tech Innovatorsssa",
+      "hqAddress": "123 Silicon Valley, CA",
       "isActive": true,
-      "id": "2"
+      "id": "1"
     },
     {
-      "companyName": "324324s",
-      "hqAddress": "32424333",
-      "isActive": true,
-      "id": "3"
+      "id": "2",
+      "companyName": "Eco Solution",
+      "hqAddress": "456 Green Street, NY",
+      "isActive": false
     },
     {
-      "companyName": "33",
-      "hqAddress": "33sdasd",
-      "isActive": false,
+      "companyName": "HealthCare Plusss",
+      "hqAddress": "101 Wellness Road, S",
+      "isActive": true,
       "id": "4"
     },
     {
-      "id": "5",
-      "companyName": "sdaads",
-      "hqAddress": "sdd",
+      "companyName": "Smart Builderssssss",
+      "hqAddress": "202 Construction Ave, TX",
+      "isActive": true,
+      "id": "5"
+    },
+    {
+      "id": "6",
+      "companyName": "Global Logistics",
+      "hqAddress": "303 Shipping Lane, FL",
       "isActive": true
     }
   ],
   "customers": [
     {
-      "name": "Milosee",
-      "surname": "Klepicc",
-      "address": "Jovana Raskovica",
-      "age": 25,
+      "name": "Milosaa",
+      "surname": "Klepic",
+      "address": "Jovana Ducica 15",
+      "age": 21,
       "id": "1"
+    },
+    {
+      "name": "Adrijanaaaaaa",
+      "surname": "Klepic",
+      "address": "Petra Kocica",
+      "age": 25,
+      "id": "2"
+    },
+    {
+      "name": "Andreaaaaaaaaa",
+      "surname": "Visekruna",
+      "address": "Save Bubica",
+      "age": 34,
+      "id": "3"
+    },
+    {
+      "id": "4",
+      "name": "Violeta",
+      "surname": "Jagodic",
+      "address": "Sime Solaje",
+      "age": 56
+    },
+    {
+      "id": "5",
+      "name": "John",
+      "surname": "Doe",
+      "address": "Jovana Raskovica",
+      "age": 25
+    },
+    {
+      "id": "6",
+      "name": "Sinisa ",
+      "surname": "Lazendic",
+      "address": "123 Main St, Springfield, IL",
+      "age": 33
     }
   ]
 }

@@ -103,8 +103,8 @@ const EditModal = ({
                 { required: true, message: "Please select the invoice date!" },
                 () => ({
                   validator(_, value) {
-                    const selectedDate = new Date(value).setHours(0, 0, 0, 0); // Postavljamo vreme na 0 da se uporedi samo datum
-                    const today = new Date().setHours(0, 0, 0, 0); // Današnji datum bez vremena
+                    const selectedDate = new Date(value).setHours(0, 0, 0, 0);
+                    const today = new Date().setHours(0, 0, 0, 0);
 
                     if (!value || selectedDate <= today) {
                       return Promise.resolve();

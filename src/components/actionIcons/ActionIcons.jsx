@@ -4,12 +4,12 @@ import CreateIcon from "./components/CreateIcon";
 import EditIcon from "./components/EditIcon";
 
 const ActionIcons = ({
-  selectedRowId,
+  selectedRowIds,
   data,
   type,
   setData,
   setInvoices,
-  setSelectedRow,
+  setSelectedRowIds,
 }) => {
   return (
     <>
@@ -18,23 +18,23 @@ const ActionIcons = ({
           type={type}
           setData={setData}
           data={data}
-          setSelectedRow={setSelectedRow}
+          setSelectedRowIds={setSelectedRowIds}
+          selectedRowIds={selectedRowIds}
         />
         <EditIcon
           type={type}
           setData={setData}
           data={data}
-          selectedRowId={selectedRowId}
+          selectedRowIds={selectedRowIds}
           setInvoices={setInvoices}
-          setSelectedRow={setSelectedRow}
+          setSelectedRowIds={setSelectedRowIds}
         />
-
         <DeleteIcon
-          selectedRowId={selectedRowId}
+          selectedRowIds={selectedRowIds}
           type={type}
           setData={setData}
           data={data}
-          setSelectedRow={setSelectedRow}
+          setSelectedRowIds={setSelectedRowIds}
         />
       </ul>
     </>

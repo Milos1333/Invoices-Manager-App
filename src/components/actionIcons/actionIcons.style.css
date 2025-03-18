@@ -28,14 +28,14 @@
   cursor: pointer;
 }
 
-.action-icons-container li:first-child {
-  background-color: rgb(197, 255, 197);
-}
-
 .active-edit-icon {
   background-color: rgb(255, 255, 169);
 }
 
 .active-remove-icon {
   background-color: rgb(255, 169, 169);
+}
+
+.active-add-icon {
+  background-color: rgb(197, 255, 197);
 }
