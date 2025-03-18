@@ -3,12 +3,19 @@ import { postData } from "../../../core/ApiService";
 import addIcon from "../../../assets/add.png";
 import CreateModal from "../../createModal/CreateModal";
 import moment from "moment";
-import { useNotificationStore } from "../../../stores/notification.store"; // Import the notification store
+import { useNotificationStore } from "../../../stores/notification.store";
 
-const CreateIcon = ({ type, data, setData, setSelectedRow }) => {
+const CreateIcon = ({
+  type,
+  data,
+  setData,
+  setSelectedRowIds,
+  selectedRowIds,
+}) => {
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
-  const { setNotification } = useNotificationStore(); // Access notification store
+  const { setNotification } = useNotificationStore();
 
+  // Function to get entity data based on type (invoice, seller, customer)
   const getEntityData = (type, data) => {
     switch (type) {
       case "invoice":
@@ -22,10 +29,12 @@ const CreateIcon = ({ type, data, setData, setSelectedRow }) => {
     }
   };
 
+  // Handle entity creation (invoice, seller, customer)
   const handleCreate = async (newEntity) => {
     let entityData = getEntityData(type, data);
     let entityWithId;
 
+    // Function to calculate the next ID based on the current data
     const getNextId = (entityData) => {
       if (entityData.length === 0) return "1";
       const maxId = entityData.reduce(
@@ -113,16 +122,23 @@ const CreateIcon = ({ type, data, setData, setSelectedRow }) => {
       );
     }
     setIsCreateModalVisible(false);
-    setSelectedRow(null); // Reset selectedRowId after closing the modal
+    setSelectedRowIds([]); // Reset selected rows after creation
   };
 
+  // Function to show the modal for creating a new entity
   const showCreateModal = () => {
-    setIsCreateModalVisible(true); // Ensure selectedRowId is reset when showing the modal
+    if (selectedRowIds.length === 0) {
+      setIsCreateModalVisible(true);
+      setSelectedRowIds([]);
+    }
   };
 
   return (
     <>
-      <li onClick={showCreateModal}>
+      <li
+        onClick={showCreateModal}
+        className={selectedRowIds.length === 0 ? "active-add-icon" : ""}
+      >
         <img src={addIcon} width="21px" alt="Add Icon" />
       </li>
 
@@ -130,7 +146,7 @@ const CreateIcon = ({ type, data, setData, setSelectedRow }) => {
         isVisible={isCreateModalVisible}
         onClose={() => {
           setIsCreateModalVisible(false);
-          setSelectedRow(null); // Ensure selectedRowId is reset when closing the modal
+          setSelectedRowIds([]);
         }}
         onCreate={handleCreate}
         type={type}

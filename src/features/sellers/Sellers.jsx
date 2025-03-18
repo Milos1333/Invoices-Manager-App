@@ -5,7 +5,7 @@ import ActionIcons from "../../components/actionIcons/ActionIcons";
 import { useState } from "react";
 
 const Sellers = ({ sellers, setSellers, invoices, setInvoices }) => {
-  const [selectedRowId, setSelectedRowId] = useState(null);
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   const columns = [
     {
@@ -30,10 +30,14 @@ const Sellers = ({ sellers, setSellers, invoices, setInvoices }) => {
     },
   ];
 
+  // Handle row click to select/deselect rows
   const handleRowClick = (record) => {
-    setSelectedRowId((prevSelectedRowId) =>
-      prevSelectedRowId === record.id ? null : record.id
-    );
+    setSelectedRowIds((prevSelectedRowIds) => {
+      if (prevSelectedRowIds.includes(record.id)) {
+        return prevSelectedRowIds.filter((id) => id !== record.id);
+      }
+      return [...prevSelectedRowIds, record.id];
+    });
   };
 
   return (
@@ -43,12 +47,12 @@ const Sellers = ({ sellers, setSellers, invoices, setInvoices }) => {
       </div>
       <div className="action-icons-container">
         <ActionIcons
-          selectedRowId={selectedRowId}
+          selectedRowIds={selectedRowIds}
           data={{ sellers, invoices }}
           type="seller"
           setData={setSellers}
           setInvoices={setInvoices}
-          setSelectedRow={setSelectedRowId}
+          setSelectedRowIds={setSelectedRowIds}
         />
       </div>
       <div className="invoices-table-container">
@@ -62,7 +66,7 @@ const Sellers = ({ sellers, setSellers, invoices, setInvoices }) => {
               onClick: () => handleRowClick(record),
             })}
             rowClassName={(record) =>
-              record.id === selectedRowId ? "selected-row" : ""
+              selectedRowIds.includes(record.id) ? "selected-row" : ""
             }
           />
         ) : (

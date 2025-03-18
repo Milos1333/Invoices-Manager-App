@@ -7,15 +7,16 @@ import { putData } from "../../../core/ApiService";
 const EditIcon = ({
   type,
   setData,
-  selectedRowId,
+  selectedRowIds,
   data,
   setInvoices,
-  setSelectedRow,
+  setSelectedRowIds,
 }) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [selectedEntity, setSelectedEntity] = useState(null);
-  const { setNotification } = useNotificationStore(); // Access notification store
+  const [selectedEntities, setSelectedEntities] = useState([]);
+  const { setNotification } = useNotificationStore();
 
+  // Function to get entity data based on type (invoice, seller, customer)
   const getEntityData = (type, entityData) => {
     switch (type) {
       case "invoice":
@@ -30,104 +31,90 @@ const EditIcon = ({
   };
 
   const showEditModal = () => {
-    if (selectedRowId) {
+    if (selectedRowIds.length === 1) {
       const entityData = getEntityData(type, data);
-      const entity = entityData.find((item) => item.id === selectedRowId);
-
-      if (entity) {
-        setSelectedEntity(entity);
-        setIsEditModalVisible(true);
-      }
+      const selectedEntities = entityData.filter((item) =>
+        selectedRowIds.includes(item.id)
+      );
+      setSelectedEntities(selectedEntities);
+      setIsEditModalVisible(true);
     }
   };
 
+  // Handle entity editing
   const handleEdit = async (updatedValues) => {
     const endpoint = type + "s";
-    const id = selectedEntity.id;
 
     try {
-      const updatedEntity = await putData(endpoint, id, updatedValues);
-
-      if (updatedEntity) {
-        if (type === "seller") {
-          const updatedSellers = data.sellers.map((seller) =>
-            seller.id === selectedEntity.id
-              ? { ...seller, ...updatedValues }
-              : seller
+      const updatedEntities = await Promise.all(
+        selectedEntities.map(async (entity) => {
+          const updatedEntity = await putData(
+            endpoint,
+            entity.id,
+            updatedValues
           );
+          if (!updatedEntity) {
+            throw new Error("Failed to update seller on the server.");
+          }
+          return updatedEntity;
+        })
+      );
 
-          const updatedInvoices = data.invoices.map((invoice) =>
-            invoice.sellerId === selectedEntity.id
-              ? { ...invoice, sellerName: updatedValues.companyName }
-              : invoice
-          );
-
-          setData(updatedSellers);
-          setInvoices(updatedInvoices);
-
-          updatedInvoices.forEach(async (invoice) => {
-            await putData("invoices", invoice.id, invoice);
-          });
-        } else if (type === "customer") {
-          const updatedCustomers = data.customers.map((customer) =>
-            customer.id === selectedEntity.id
-              ? { ...customer, ...updatedValues }
-              : customer
-          );
-
-          const updatedInvoices = data.invoices.map((invoice) =>
-            invoice.customerId === selectedRowId
-              ? { ...invoice, customerName: `${updatedValues.name}` }
-              : invoice
-          );
-
-          setData(updatedCustomers);
-          setInvoices(updatedInvoices);
-          updatedInvoices.forEach(async (invoice) => {
-            await putData("invoices", invoice.id, invoice);
-          });
-        } else if (type === "invoice") {
-          const selectedSeller = data.sellers.find(
-            (seller) => seller.companyName === updatedValues.sellerName
-          );
-
-          const selectedCustomer = data.customers.find(
-            (customer) => customer.name === updatedValues.customerName
-          );
-
-          const updatedInvoices = data.invoices.map((invoice) =>
-            invoice.id === selectedEntity.id
-              ? {
-                  ...invoice,
-                  ...updatedValues,
-                  sellerId: selectedSeller.id,
-                  customerId: selectedCustomer.id,
-                }
-              : invoice
-          );
-
-          setData(updatedInvoices);
-        }
-
-        setNotification(
-          true,
-          "success",
-          "Update Successful",
-          "The entity has been successfully updated.",
-          "#d5ffd0" // Light green color for success
+      if (type === "seller") {
+        const updatedSellers = data.sellers.map((seller) =>
+          selectedEntities.some((entity) => entity.id === seller.id)
+            ? { ...seller, ...updatedValues }
+            : seller
         );
-        setIsEditModalVisible(false);
-        setSelectedRow(null); // Reset selectedRowId after closing the modal
-      } else {
-        throw new Error("Update failed");
+        setData(updatedSellers);
+
+        const updatedInvoices = data.invoices.map((invoice) =>
+          selectedEntities.some((entity) => invoice.sellerId === entity.id)
+            ? { ...invoice, sellerName: updatedValues.companyName }
+            : invoice
+        );
+
+        setInvoices(updatedInvoices);
+      } else if (type === "customer") {
+        const updatedCustomers = data.customers.map((customer) =>
+          selectedEntities.some((entity) => entity.id === customer.id)
+            ? { ...customer, ...updatedValues }
+            : customer
+        );
+        setData(updatedCustomers);
+
+        const updatedInvoices = data.invoices.map((invoice) =>
+          selectedEntities.some((entity) => invoice.customerId === entity.id)
+            ? { ...invoice, customerName: updatedValues.name }
+            : invoice
+        );
+        setInvoices(updatedInvoices);
+      } else if (type === "invoice") {
+        const updatedInvoices = data.invoices.map((invoice) =>
+          selectedEntities.some((entity) => invoice.id === entity.id)
+            ? { ...invoice, ...updatedValues }
+            : invoice
+        );
+        setData(updatedInvoices);
       }
+
+      // Display notification for successful update
+      setNotification(
+        true,
+        "success",
+        "Update Successful",
+        "The entity has been successfully updated.",
+        "#d5ffd0"
+      );
+      setIsEditModalVisible(false);
+      setSelectedRowIds([]);
     } catch (error) {
       setNotification(
         true,
         "error",
         "Update Failed",
         "An error occurred while updating the entity.",
-        "#f5c6c6" // Light red color for error
+        "#f5c6c6"
       );
     }
   };
@@ -135,7 +122,7 @@ const EditIcon = ({
   return (
     <>
       <li
-        className={selectedRowId ? "active-edit-icon" : ""}
+        className={selectedRowIds.length === 1 ? "active-edit-icon" : ""}
         onClick={showEditModal}
       >
         <img src={editIcon} width="20px" alt="Edit Icon" />
@@ -146,12 +133,12 @@ const EditIcon = ({
           isVisible={isEditModalVisible}
           onClose={() => {
             setIsEditModalVisible(false);
-            setSelectedRow(null); // Ensure selectedRowId is reset when closing the modal
+            setSelectedRowIds([]);
           }}
           onEdit={handleEdit}
           type={type}
           data={data}
-          initialValues={selectedEntity}
+          initialValues={selectedEntities[0]}
         />
       )}
     </>
