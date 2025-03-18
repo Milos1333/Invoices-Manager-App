@@ -5,7 +5,7 @@ import ActionIcons from "../../components/actionIcons/ActionIcons";
 import { useState } from "react";
 
 const Customers = ({ customers, setCustomers, invoices, setInvoices }) => {
-  const [selectedRowIds, setSelectedRowIds] = useState([]); 
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   const columns = [
     {
@@ -34,7 +34,7 @@ const Customers = ({ customers, setCustomers, invoices, setInvoices }) => {
   const handleRowClick = (record) => {
     setSelectedRowIds((prevSelectedRowIds) => {
       if (prevSelectedRowIds.includes(record.id)) {
-        return prevSelectedRowIds.filter((id) => id !== record.id); /
+        return prevSelectedRowIds.filter((id) => id !== record.id);
       }
       return [...prevSelectedRowIds, record.id];
     });

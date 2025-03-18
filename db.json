@@ -12,7 +12,7 @@
   ],
   "sellers": [
     {
-      "companyName": "Tech Innovatorsssa",
+      "companyName": "Tech InnovatosaTech InnovatorsssaTech Innovatorsssa",
       "hqAddress": "123 Silicon Valley, CA",
       "isActive": true,
       "id": "1"
@@ -44,32 +44,11 @@
   ],
   "customers": [
     {
-      "name": "Milosaa",
+      "name": "Milosaaa",
       "surname": "Klepic",
       "address": "Jovana Ducica 15",
       "age": 21,
       "id": "1"
-    },
-    {
-      "name": "Adrijanaaaaaa",
-      "surname": "Klepic",
-      "address": "Petra Kocica",
-      "age": 25,
-      "id": "2"
-    },
-    {
-      "name": "Andreaaaaaaaaa",
-      "surname": "Visekruna",
-      "address": "Save Bubica",
-      "age": 34,
-      "id": "3"
-    },
-    {
-      "id": "4",
-      "name": "Violeta",
-      "surname": "Jagodic",
-      "address": "Sime Solaje",
-      "age": 56
     },
     {
       "id": "5",

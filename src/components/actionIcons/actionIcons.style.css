@@ -25,17 +25,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
 .active-edit-icon {
   background-color: rgb(255, 255, 169);
+  cursor: pointer;
 }
 
 .active-remove-icon {
   background-color: rgb(255, 169, 169);
+  cursor: pointer;
 }
 
 .active-add-icon {
   background-color: rgb(197, 255, 197);
+  cursor: pointer;
 }
