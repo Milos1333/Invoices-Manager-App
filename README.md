@@ -77,4 +77,4 @@ To run the project locally:
    The app uses Zustand for state management and JSON Server to simulate a backend API for real-time data management.
 
 
-## Author: Miloš Klepić
+## Author: Milos Klepic
