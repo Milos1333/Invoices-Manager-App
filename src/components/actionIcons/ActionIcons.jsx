@@ -1,4 +1,4 @@
-import "./actionIcons.style.css";
+import "./ActionIcons.style.css";
 import DeleteIcon from "./components/DeleteIcon";
 import CreateIcon from "./components/CreateIcon";
 import EditIcon from "./components/EditIcon";

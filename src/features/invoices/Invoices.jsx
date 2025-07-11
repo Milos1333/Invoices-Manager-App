@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Table } from "antd";
 import "antd/dist/reset.css";
-import "./invoices.style.css";
+import "./Invoices.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 
 const Invoices = ({ invoices, sellers, customers, setInvoices }) => {

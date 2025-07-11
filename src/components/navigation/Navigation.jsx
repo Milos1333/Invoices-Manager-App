@@ -1,4 +1,4 @@
-import "./navigation.style.css";
+import "./Navigation.style.css";
 import { NavLink } from "react-router-dom";
 import invoicesIcon from "../../assets/invoicesIcon.png";
 import sellersIcon from "../../assets/sellersIcon.png";
