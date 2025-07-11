@@ -1,6 +1,6 @@
 import { Table } from "antd";
 import "antd/dist/reset.css";
-import "./Customers.style.css";
+import "./customers.style.css";
 import ActionIcons from "../../components/actionIcons/ActionIcons";
 import { useState } from "react";
 

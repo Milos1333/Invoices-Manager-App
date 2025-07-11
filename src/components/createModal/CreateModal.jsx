@@ -1,6 +1,6 @@
 import { Modal, Form, Input, InputNumber, Switch, Select } from "antd";
 import { useEffect } from "react";
-import "./CreateModal.style.css";
+import "./createModal.style.css";
 
 const CreateModal = ({ isVisible, onClose, onCreate, type, data }) => {
   const [form] = Form.useForm();

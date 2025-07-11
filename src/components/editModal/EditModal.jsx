@@ -1,6 +1,6 @@
 import { Modal, Form, Input, InputNumber, Switch, Select, message } from "antd";
 import { useEffect } from "react";
-import "./EditModal.style.css";
+import "./editModal.style.css";
 
 const EditModal = ({
   isVisible,

@@ -1,5 +1,5 @@
 import { Modal, Button } from "antd";
-import "./DeleteModal.style.css";
+import "./deleteModal.style.css";
 
 const DeleteModal = ({ isVisible, onConfirm, onCancel }) => {
   return (
