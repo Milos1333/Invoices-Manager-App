@@ -4,7 +4,7 @@ import { fetchData } from "./core/ApiService";
 import Customers from "./features/customers/Customers";
 import Sellers from "./features/sellers/Sellers";
 import Invoices from "./features/invoices/Invoices";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/navigation/Navigation";
 import Notification from "./components/Notification/Notification";
 
 const App = () => {
