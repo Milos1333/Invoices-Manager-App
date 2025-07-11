@@ -5,7 +5,7 @@ import Customers from "./features/customers/Customers";
 import Sellers from "./features/sellers/Sellers";
 import Invoices from "./features/invoices/Invoices";
 import Navigation from "./components/navigation/Navigation";
-import Notification from "./components/Notification/Notification";
+import Notification from "./components/notification/Notification";
 
 const App = () => {
   const [invoices, setInvoices] = useState([]);
